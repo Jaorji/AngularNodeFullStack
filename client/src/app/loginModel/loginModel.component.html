@@ -1,0 +1,48 @@
+<div class = "backdrop" (click)="clicked()"></div>
+<div class = "modelContainer">
+  <div class = "loginForm">
+    <div class="row">
+      <form class="col s12" [formGroup]="loginForm" novalidate >
+        <div class="row">
+          <div class="input-field col s12">
+            <div class="form-group" [ngClass]="{
+            'has-danger':email.invalid && (email.dirty || email.touched),
+            'has-success':email.valid && (email.dirty || email.touched)
+            }">
+            <input id="email" type="email" class = "validate"class="form-control" formControlName = "email" required [(ngModel)]="emailAddress">
+            <label for="email">Email</label>
+              <div class = "form-control-feedback"
+               *ngIf = "email.errors && (email.dirty || email.touched)">
+             <p *ngIf = "email.errors.required">Email is required</p>
+             <p *ngIf = "email.errors.email&&!email.errors.required">The email address invalid</p>
+             </div>
+            </div>
+          </div>
+        </div>
+         <div class="row">
+            <div class="form-group"
+                [ngClass]="{
+                'has-danger': password.invalid && (password.dirty || password.touched),
+                'has-success': password.valid && (password.dirty || password.touched)
+            }">
+            <div class="input-field col s12">
+            <input id="password" type="password" class="validate" class="form-control"
+                  formControlName="password"
+                  required>
+            <label for="password">Password</label>
+            <div class="form-control-feedback"
+                 *ngIf="password.errors && (password.dirty || password.touched)">
+              <p *ngIf="password.errors.required">Password is required</p>
+              <p *ngIf="password.errors.minlength">Password must be 8 ~12 characters long</p>
+               <p *ngIf="password.errors.maxlength">Password must be 8 ~12 characters long</p> 
+            </div>
+          </div>
+          </div>
+        </div>
+      </form>
+       <a *ngIf = "loginForm.invalid" class="btn disabled">Login</a>
+       <a *ngIf ="loginForm.valid" class="waves-effect waves-light btn" (click)="login()">Login</a>
+    </div>
+  </div>
+</div>
+  

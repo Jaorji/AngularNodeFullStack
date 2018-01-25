@@ -1,0 +1,64 @@
+.movie-container{
+ display: flex;
+  margin-top: 50px;
+  margin-bottom:50px;
+}
+.movie{
+  height:100%;
+  width:50%;
+  text-align: center;
+  margin:auto;
+}
+
+.movie-title{
+  font-weight:bold;
+  font-size:4rem;
+}
+
+.movie-overview{
+  font-size:1rem;
+}
+
+.movieImage{
+  text-align: center;
+  width:40%;
+  margin:auto;
+}
+
+.movie-container img{
+  height:400px;
+  width:400px;
+}
+
+@media (max-width:450px){
+  .movie-container{
+     display: flex;
+     flex-direction: column;
+  }
+
+  .movie-title{
+    font-weight:bold;
+    font-size:2rem;
+  }
+
+  .movie-overview{
+    font-size:1rem;
+  }
+
+  .movie{
+    height:50%;
+    width:100%;
+    text-align: center;
+    margin:auto;
+  }
+
+  .movieImage{
+    width:auto;
+  }
+
+  .movie-container img{
+    height:200px;
+    width:200px;
+  }
+  
+}

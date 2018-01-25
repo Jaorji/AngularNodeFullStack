@@ -1,0 +1,44 @@
+.movies-container{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 0;
+}
+
+.search{
+  display: flex;
+}
+
+.material-icons{
+  text-align: center;
+  margin:auto;
+}
+
+.search-inpit{
+  text-align: center;
+  margin:auto;
+}
+
+.search-movie .card .card-content{
+  height:130px;
+}
+
+@media (max-width:450px){
+  .latestMovie-container .card-content{
+    display: none;
+  }
+
+  .latestMovie-container .card-title{
+    display: none;
+  }
+
+  .card-title{
+    font-size:5px;
+  }
+
+  .search-movie .result{
+    font-weight: bold;
+    font-size:1rem;
+  }
+
+}

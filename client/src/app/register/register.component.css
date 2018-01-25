@@ -1,0 +1,93 @@
+.register-container{
+  display: flex;
+  position:relative;
+  height: 100%;
+  width:100%;
+  align-items: stretch;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.right{
+  height:100%;
+  width:50%;
+  text-align: center;
+  margin:auto;
+}
+
+.line{
+  width:1px;
+  background-color: green;
+}
+
+.left{
+  text-align: center;
+  height:100%;
+  width:40%;
+  margin:auto;
+}
+
+.registerForm{
+  margin:auto;
+  text-align: center;
+  margin-top:10%;
+  margin-bottom: 10%;
+  border: green 2px solid;
+  border-radius: 6px;
+  width:50%;
+  margin-right: 15%;
+}
+
+.loginWithGoogle{
+  margin:auto;
+  text-align: center;
+  width:50%;
+  margin-left: 10%;
+}
+
+.form-control-feedback {
+  margin-top:0;
+}
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea{
+  margin:0;
+}
+
+.form-control-feedback p{
+  color:red;
+}
+
+@media (max-width:450px){
+  .register-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right{
+    height:50%;
+    width:100%;
+    text-align: center;
+    margin:auto;
+  }
+
+  .registerForm{
+    margin: auto;
+    margin-top:10%;
+  }
+
+  .left{
+    height:50%;
+    width:100%;
+    text-align: center;
+  }
+
+  .loginWithGoogle{
+    margin: auto;
+    margin-top:10%;
+    margin-bottom:10%;  
+  }
+
+}
+
+
+
