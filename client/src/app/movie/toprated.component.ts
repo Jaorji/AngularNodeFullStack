@@ -1,6 +1,6 @@
 import { Component,OnInit} from '@angular/core';
 import { Movie } from '../_model/Movie';
-import { MovieService,MovieGlobals } from '../_service/index';
+import { MovieService } from '../_service/index';
 import { Router } from '@angular/router';
 
   @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
                  <div class="row">
                    <div class = "col s5 m3"
                         *ngFor="let topRatedMovie of topRatedMovies,let i = index"
-                        (click)="setCurrentMovie(i)" >
+                        [routerLink]="[topRatedMovie.id]" >
                       <div class = "card" *ngIf="i<4">
                         <div class = "card-image">
                           <img [src]="topRatedMovie.backdropUrl"> 
@@ -32,25 +32,18 @@ import { Router } from '@angular/router';
 export class TopRatedMovie  {
 
   topRatedMovies:Movie[];
-  currentMovie:Movie;
   
   constructor(private movieService:MovieService,
-              private router:Router,
-              private movieGlobals:MovieGlobals){}
+              private router:Router){}
 
   ngOnInit(){
     this.movieService.getTopRated().subscribe(res=>this.topRatedMovies=res);
-    this.movieGlobals.selectmovie.subscribe(res=>this.currentMovie=res);
-  }
- 
-  setCurrentMovie(index){
-    this.currentMovie = this.topRatedMovies[index];
-    this.movieGlobals.changeSelectMovie(this.currentMovie);
-    this.router.navigate(['./movie-detail']);
   }
 
-   backdropStyle=(i)=>({
-    'background':`linear-gradient(180deg,rgba(0,0,0,0.7),transparent),url(${this.topRatedMovies[i].backdropUrl})`,
-    'backdround-size':'cover'
-  })
+  backdropStyle(i){
+     return{
+      'background':`linear-gradient(180deg,rgba(0,0,0,0.7),transparent),url(${this.topRatedMovies[i].backdropUrl})`,
+      'backdround-size':'cover'
+    }
+  }
 }

@@ -19,22 +19,18 @@
   margin:auto;
 }
 
-.search-movie .card .card-content{
-  height:130px;
-}
+ .card .card-title{
+   font-size:1.5rem;
+} 
 
 @media (max-width:450px){
   .latestMovie-container .card-content{
     display: none;
   }
 
-  .latestMovie-container .card-title{
-    display: none;
-  }
-
-  .card-title{
-    font-size:5px;
-  }
+  .card .card-title{
+    font-size:1rem;
+  } 
 
   .search-movie .result{
     font-weight: bold;

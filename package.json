@@ -24,5 +24,8 @@
     "grunt-contrib-uglify": "3.3.0",
     "mongoose": "^5.0.1",
     "nodemon": "^1.14.11"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.6.6"
   }
 }

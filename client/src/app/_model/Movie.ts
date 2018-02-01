@@ -1,4 +1,5 @@
 export interface Movie{
+  id?:number|null;
   backdrop_path?:string|null
   poster_path?:string|null
   overview?:string|null

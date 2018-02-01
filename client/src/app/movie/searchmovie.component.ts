@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Movie } from '../_model/Movie';
-import { MovieService,MovieGlobals } from '../_service/index';
+import { MovieService} from '../_service/index';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import {Subject} from 'rxjs/Subject';
@@ -9,6 +9,7 @@ import {Subject} from 'rxjs/Subject';
   @Component({
      selector:"search-movie",
      template:`
+      <div class="container">
        <div class="search-movie">
          <div class = "search">
           <i class="material-icons">search</i>
@@ -27,11 +28,11 @@ import {Subject} from 'rxjs/Subject';
                <ng-template #searchMovieShow>
                  <p>Your Search Results:</p>
                   <div class="row">
-                   <div class="col s12 m4" 
+                   <div class="col s12 m3" 
                         *ngFor="let searchResult of searchResults;let i= index" 
-                        (click)="setCurrentMovie(i)">
+                        [routerLink]="[searchResult.id]">
                     <div class="card blue-grey darken-1" 
-                         *ngIf="i<15" [ngStyle]="backdropStyle(i)">
+                         *ngIf="i<16" [ngStyle]="backdropStyle(i)">
                       <div class="card-content white-text">
                        <span class="card-title">{{searchResult.title}}</span>
                          <div class="movie-year">{{searchResult.release_date}}</div>
@@ -40,6 +41,7 @@ import {Subject} from 'rxjs/Subject';
                 </div>
              </div>
           </ng-template>
+      </div>
     </div>
      `,
       styleUrls: ['./movie.component.css']
@@ -49,23 +51,17 @@ import {Subject} from 'rxjs/Subject';
 export class SearchMovieComponent  {
 
   searchResults:Movie[]=[];
-  selectMovie:Movie;
   searchMovie:Subject<string> = new Subject<string>();
   isFetch:boolean = false;
   search:string;
-  ifMovieSearch:boolean;
+  
   constructor(private movieService:MovieService,
-              private movieGlobals:MovieGlobals,
               private router:Router) {}
 
   ngOnInit() {
-    this.movieGlobals.ifsearch.subscribe(res=>this.ifMovieSearch=res);
-    this.movieGlobals.selectmovie.subscribe(res=>this.selectMovie=res);
     this.searchMovie
         .map(query=>{
           this.isFetch = true;
-          this.ifMovieSearch = true;
-          this.movieGlobals.changeifSearch(this.ifMovieSearch);
           return query
         })
         .subscribe(this.searchQuery.bind(this));
@@ -81,15 +77,11 @@ export class SearchMovieComponent  {
     }    
   }
 
-  setCurrentMovie(index){
-    this.selectMovie = this.searchResults[index];
-    this.movieGlobals.changeSelectMovie(this.selectMovie);
-    this.router.navigate(['./movie-detail']);
+  backdropStyle(i){
+    return{
+      'background':`linear-gradient(180deg,rgba(0,0,0,0.7),transparent),url(${this.searchResults[i].backdropUrl})`,
+      'backdround-size':'cover'
+    }
   }
-
-  backdropStyle=(i)=>({
-    'background':`linear-gradient(180deg,rgba(0,0,0,0.7),transparent),url(${this.searchResults[i].backdropUrl})`,
-    'backdround-size':'cover'
-  })
 
 }

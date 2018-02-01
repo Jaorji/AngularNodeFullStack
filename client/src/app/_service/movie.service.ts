@@ -7,11 +7,12 @@ import { Movie } from"../_model/Movie";
 export class MovieService {
 
   private apiKey:string = "4d977eee3282130b79ac683bf57b2cb6";
+  private baseUrl:string = "https://api.themoviedb.org/3/movie/";
   private searchApiUrl:string="https://api.themoviedb.org/3/search/movie";
   private baseConfigUrl:string="https://api.themoviedb.org/3/configuration";
-  private nowPlayingApiUrl:string="https://api.themoviedb.org/3/movie/now_playing";
-  private upComingApiUrl:string="https://api.themoviedb.org/3/movie/upcoming";
-  private topRatedApitUrl:string="https://api.themoviedb.org/3/movie/top_rated";
+  private nowPlayingApiUrl:string=this.baseUrl+"now_playing";
+  private upComingApiUrl:string=this.baseUrl+"upcoming";
+  private topRatedApitUrl:string=this.baseUrl+"top_rated";
 
   private imageUrl:string="";
   private imageSizeUrl:{backdrop?:string[],poster?:string[]}={};
@@ -66,8 +67,21 @@ export class MovieService {
   }
 
   getNowPlaying(){
-    return this.call(this.nowPlayingApiUrl,this.params);
+     return this.call(this.nowPlayingApiUrl,this.params);
   }
+
+  getMovieDetail(index){
+    const params = this.params;
+    return this.http.get<any>(this.baseUrl+index,{params})
+                    .map(res=>{
+                      return{
+                        ...res,
+                        backdropUrl:this.createImageUrl(res.backdrop_path,true),
+                        posterUrl:this.createImageUrl(res.poster_path,false)
+                      }
+                    });
+  }
+
 
   getUpComing(){
     return this.call(this.upComingApiUrl,this.params);
